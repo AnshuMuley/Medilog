@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1735" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/drawable/border.xml" value="0.2265" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/drawable/borders.xml" value="0.1005" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/drawable/button.xml" value="0.1735" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1735" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/drawable/ic_profile.xml" value="0.1735" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/font/sans_bold.xml" value="0.1390625" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/layout/activity_analysis.xml" value="0.21784420289855072" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/layout/activity_appointments.xml" value="0.18070652173913043" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/layout/activity_example.xml" value="0.18070652173913043" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/layout/activity_main2.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/layout/activity_profile.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/layout/activity_upload_prescriptions.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/layout/activity_upload_reports.xml" value="0.21784420289855072" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/layout/borders.xml" value="0.11018518518518519" />
+        <entry key="..\:/Users/HP/Downloads/PATIENT_MANAGEMENT_SYSTEM_IN_JAVA_WITH_SOURCE_CODE/Medilog/app/src/main/res/layout/dashboardlite.xml" value="0.10989583333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

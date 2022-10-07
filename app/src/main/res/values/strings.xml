@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Medilog</string>
+    <string name="AlreadyAUser"></string>
+    <string-array name="Tests">
+        <item>Fasting</item>
+        <item>Posting</item>
+        <item>Random</item>
+        <item>A1c Test</item>
+    </string-array>
+</resources>
