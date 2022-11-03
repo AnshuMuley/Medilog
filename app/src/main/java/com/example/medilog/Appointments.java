@@ -17,6 +17,7 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -25,7 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Appointments extends AppCompatActivity implements
         View.OnClickListener {
 
-    Button btnTimePicker;
+    Button btnTimePicker,addAppointment;
     EditText txtTime, txtDate;
     CalendarView datePicker;
     private int mHour, mMinute, mYear, mMonth, mDay;
@@ -45,9 +46,11 @@ public class Appointments extends AppCompatActivity implements
         txtTime = (EditText) findViewById(R.id.in_time);
         datePicker = (CalendarView) findViewById(R.id.calendarView);
         txtDate = (EditText) findViewById(R.id.in_date);
+        addAppointment = (Button) findViewById(R.id.button9);
 
         btnTimePicker.setOnClickListener(this);
         datePicker.setOnClickListener(this);
+        addAppointment.setOnClickListener(this);
 
         datePicker.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -57,7 +60,22 @@ public class Appointments extends AppCompatActivity implements
             }
 
         });
+        addAppointment.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+               // Intent mIntent = new Intent(Appointments.this, Appointments.class);
+                Intent mIntent = new Intent(Intent.ACTION_EDIT);
+                mIntent.setType("vnd.android.cursor.item/event");
+                mIntent.putExtra("beginTime", cal.getTimeInMillis());
+                mIntent.putExtra("allDay", true);
+                mIntent.putExtra("rrule", "FREQ=YEARLY");
+                mIntent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
+                mIntent.putExtra("title", "A Test Event from android app");
+                startActivity(mIntent);
+            }
+        });
     }
+
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         Intent myIntent = new Intent(Appointments.this, Profile.class);
@@ -79,6 +97,10 @@ public class Appointments extends AppCompatActivity implements
             final Calendar c = Calendar.getInstance();
             mHour = c.get(Calendar.HOUR_OF_DAY);
             mMinute = c.get(Calendar.MINUTE);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+            mMonth = c.get(Calendar.MONTH);
+            mYear = c.get(Calendar.YEAR);
+
 
             // Launch Time Picker Dialog
             TimePickerDialog timePickerDialog = new TimePickerDialog(this,
@@ -100,6 +122,9 @@ public class Appointments extends AppCompatActivity implements
                     }, mHour, mMinute, false);
             timePickerDialog.show();
         }
+
     }
+
 }
+
 
