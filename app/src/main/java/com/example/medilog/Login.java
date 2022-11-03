@@ -59,27 +59,37 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressbar2.setVisibility(View.VISIBLE);
-               // String password = password.getText().toString();
-               // String email = email.getText().toString();
+                isAllFieldsChecked=true;
+                isAllFieldsChecked = checkDataEntered();
+                if (isAllFieldsChecked) {
+                    login.setClickable(true);
+                    progressbar2.setVisibility(View.VISIBLE);
+
+                    // String password = password.getText().toString();
+                    // String email = email.getText().toString();
 
               /*  Intent intent=new Intent(Login.this,Profile.class);
                 startActivity(intent);
                 Toast.makeText(Login.this,"Moved to Profile",Toast.LENGTH_SHORT).show();*/
 
-                firebaseAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressbar2.setVisibility(View.GONE);
-                               if(task.isSuccessful()){
-                                   startActivity(new Intent(Login.this , Profile.class));
-                               }
-                               else{
-                                   Toast.makeText(Login.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                               }
-                            }
-                        });
+                    firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    progressbar2.setVisibility(View.GONE);
+                                    if (task.isSuccessful()) {
+                                        if (firebaseAuth.getCurrentUser().isEmailVerified()) {
+                                            startActivity(new Intent(Login.this, Profile.class));
+                                        } else {
+                                            Toast.makeText(Login.this, "Please verify your email via verification link sent to your registered Email id.", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    } else {
+                                        Toast.makeText(Login.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
             }
 
         });

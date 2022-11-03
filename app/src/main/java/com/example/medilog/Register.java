@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Register extends AppCompatActivity {
@@ -78,8 +79,6 @@ public class Register extends AppCompatActivity {
                     register.setClickable(true);
                     Intent i2 = new Intent(Register.this, Login.class);
                     startActivity(i2);
-
-                    Toast.makeText(Register.this, "Successfully Registered", Toast.LENGTH_LONG).show();
                 }
                 signUp();
             }
@@ -92,12 +91,14 @@ public class Register extends AppCompatActivity {
         final String Address = address.getText().toString().trim();
         final String Email = email.getText().toString().trim();
 
+
         mAuth.createUserWithEmailAndPassword(email.getText().toString().trim(),password.getText().toString().trim())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressbar.setVisibility(View.VISIBLE);
                         if (task.isSuccessful()) {
+
                             //we will store additional fiels in firebase
                             Database datab1 = new Database(fname , lname , Address , Email){
                                /*fname,
@@ -112,7 +113,22 @@ public class Register extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task){
                                             progressbar.setVisibility(View.VISIBLE);
                                             if(task.isSuccessful()){
-                                                Toast.makeText(Register.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                                mAuth.getCurrentUser().sendEmailVerification()
+                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if(task.isSuccessful()){
+                                                                    Toast.makeText(Register.this, "Registration Successful . Please check your Email for Verification"
+                                                                            , Toast.LENGTH_SHORT).show();
+                                                                }
+                                                                else{
+                                                                    Toast.makeText(Register.this, task.getException().getMessage()
+                                                                            , Toast.LENGTH_SHORT).show();
+                                                                }
+
+                                                            }
+                                                        });
+
                                             }
                                             else{
 
@@ -182,7 +198,7 @@ public class Register extends AppCompatActivity {
         }
         if (!password.getText().toString().trim().matches(passwordPattern))
         {
-            password.setError("Invalid Password");
+            password.setError("Invalid Password.");
             isAllFieldsChecked =false;
         }
 

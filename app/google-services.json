@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "20790840743",
+    "firebase_url": "https://medilog-98180-default-rtdb.firebaseio.com",
+    "project_id": "medilog-98180",
+    "storage_bucket": "medilog-98180.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20790840743:android:26347109382fb722c9ba82",
+        "android_client_info": {
+          "package_name": "com.example.medilog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20790840743-qj38g8msbf9oq1vj1sl791ad2t5i30vm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medilog",
+            "certificate_hash": "7dd19734bc3d926e3576e01651c93dbe10ed3228"
+          }
+        },
+        {
+          "client_id": "20790840743-rpfttd87ahlqp8tu7q2c81bo4alh69ks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJeKC8SpJAhDGLpIKh66mMkYjUw6quPJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20790840743-rpfttd87ahlqp8tu7q2c81bo4alh69ks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

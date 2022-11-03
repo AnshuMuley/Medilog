@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +27,7 @@ public class Profile extends AppCompatActivity {
     Button b4;
     Button b5;
     Button LogOut;
-    EditText Email ;
+    TextView profileName ;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -43,7 +44,7 @@ public class Profile extends AppCompatActivity {
         b4=(Button) findViewById(R.id.button4);
         b5 = (Button) findViewById(R.id.button5);
         LogOut=(Button) findViewById(R.id.button6);
-        Email=(EditText) findViewById(R.id.editTextTextPersonName);
+        profileName=(TextView) findViewById(R.id.editTextTextPersonName);
 
         firebaseAuth= FirebaseAuth.getInstance();
         firebaseUser= firebaseAuth.getCurrentUser();
@@ -56,7 +57,7 @@ public class Profile extends AppCompatActivity {
                     String fnameR = String.valueOf(dataSnapshot.child("fname").getValue());
                     String lnameR = String.valueOf(dataSnapshot.child("lname").getValue());
                     String fullname = fnameR + " " + lnameR;
-                    Email.setText(fullname);
+                    profileName.setText(fullname);
                 }
                 else{
                     Toast.makeText(Profile.this, "Try again later", Toast.LENGTH_SHORT).show();
