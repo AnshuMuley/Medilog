@@ -16,6 +16,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class Analysis extends AppCompatActivity {
@@ -23,6 +26,11 @@ public class Analysis extends AppCompatActivity {
     EditText editText;
     Button button;
     TextView textView;
+
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = firebaseDatabase.getReference("ChartValues");
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +85,14 @@ public class Analysis extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    private void InsertData(){
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String id = myRef.push().getKey();
+               // int x = Integer.parseInt(xValue.getText().toString());
+            }
+        });
+    }
 
 }
