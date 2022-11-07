@@ -19,6 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Register extends AppCompatActivity {
@@ -33,11 +34,14 @@ public class Register extends AppCompatActivity {
     String namePattern = "[a-zA-Z]+$";
     String passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$" ;
 
+
    // TextView text;
     boolean isAllFieldsChecked = true;
 
     private FirebaseAuth mAuth;
     private ProgressBar progressbar;
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = firebaseDatabase.getReference("Datab1");
 
     @Override
 
@@ -54,7 +58,6 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i1 = new Intent(Register.this, Profile.class);
                 startActivity(i1);
-
                 Toast.makeText(Register.this, "moved to login", Toast.LENGTH_LONG).show();
             }
 
@@ -78,6 +81,8 @@ public class Register extends AppCompatActivity {
                 if (isAllFieldsChecked) {
                     register.setClickable(true);
                     Intent i2 = new Intent(Register.this, Login.class);
+//                    String e =email.getText().toString().trim();
+//                    i2.putExtra("email", e);
                     startActivity(i2);
                 }
                 signUp();
@@ -85,12 +90,12 @@ public class Register extends AppCompatActivity {
         });
     }
 
+
     private void signUp(){
         final String fname = firstName.getText().toString().trim();
         final String lname = lastName.getText().toString().trim();
         final String Address = address.getText().toString().trim();
         final String Email = email.getText().toString().trim();
-
 
         mAuth.createUserWithEmailAndPassword(email.getText().toString().trim(),password.getText().toString().trim())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -99,13 +104,14 @@ public class Register extends AppCompatActivity {
                         progressbar.setVisibility(View.VISIBLE);
                         if (task.isSuccessful()) {
 
-                            //we will store additional fiels in firebase
+//                            //we will store additional fiels in firebase
                             Database datab1 = new Database(fname , lname , Address , Email){
                                /*fname,
                                 lname,
                                 Address,
                                 Email,*/
                             };
+
                             FirebaseDatabase.getInstance().getReference("Datab1")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(datab1).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -135,6 +141,7 @@ public class Register extends AppCompatActivity {
                                             }
                                         }
                                     });
+
                         }
                         else
                         {
@@ -216,7 +223,11 @@ public class Register extends AppCompatActivity {
 
     }
 
-
+    public String GetKey(){
+        String uid=mAuth.getCurrentUser().getUid();
+        String id = myRef.child("Datab1").child(uid).getKey();
+        return id;
+    }
 
 }
 

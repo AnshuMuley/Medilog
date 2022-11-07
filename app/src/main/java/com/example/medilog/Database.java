@@ -5,10 +5,12 @@ public class Database {
     public Database(){
 
     }
+
     public Database(String fname , String lname , String Address , String Email){
         this.fname = fname ;
         this.lname = lname ;
         this.Address = Address;
         this.Email = Email ;
     }
+
 }

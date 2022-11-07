@@ -18,13 +18,7 @@
         android:theme="@style/Theme.Medilog"
         tools:targetApi="31">
         <activity
-            android:name=".Barchart"
-            android:exported="false" />
-        <activity
             android:name=".UploadPrescriptions"
-            android:exported="false" />
-        <activity
-            android:name=".Appointments"
             android:exported="false" />
         <activity
             android:name=".Analysis"

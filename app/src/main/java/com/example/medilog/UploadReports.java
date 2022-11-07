@@ -38,6 +38,7 @@ import java.util.List;
 
 public class UploadReports extends AppCompatActivity {
 
+  //  private static final int PICK_IMAGE = 1;
     Button BSelectImage;
 
     ImageView IVPreviewImage;
@@ -68,6 +69,8 @@ public class UploadReports extends AppCompatActivity {
         BSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+              //  Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+               // intent.setType("image/");
                 imageChooser();
 
             }
@@ -81,7 +84,8 @@ public class UploadReports extends AppCompatActivity {
         i.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         i.setAction(Intent.ACTION_GET_CONTENT);
 
-        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+       startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+       // startActivityForResult(i,PICK_IMAGE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

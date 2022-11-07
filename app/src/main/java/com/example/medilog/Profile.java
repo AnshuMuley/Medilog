@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+
 public class Profile extends AppCompatActivity {
     Button b1;
     Button b2;
@@ -100,6 +102,8 @@ public class Profile extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i4 = new Intent(Profile.this, Analysis.class);
+                String p =profileName.getText().toString().trim();
+                i4.putExtra("profileName", p);
                 startActivity(i4);
                 Toast.makeText(Profile.this, "Moved to Analysis", Toast.LENGTH_SHORT).show();
                 finish();
@@ -108,8 +112,18 @@ public class Profile extends AppCompatActivity {
 
         b4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i5 = new Intent(Profile.this, Appointments.class);
-                startActivity(i5);
+                Intent i5 = new Intent(Profile.this, Profile.class);
+                Calendar cal = Calendar.getInstance();
+                // Intent mIntent = new Intent(Appointments.this, Appointments.class);
+                Intent mIntent = new Intent(Intent.ACTION_EDIT);
+                mIntent.setType("vnd.android.cursor.item/event");
+                mIntent.putExtra("beginTime", cal.getTimeInMillis());
+                mIntent.putExtra("allDay", true);
+                mIntent.putExtra("rrule", "FREQ=YEARLY");
+                mIntent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
+                mIntent.putExtra("title", "A Test Event from android app");
+                startActivity(mIntent);
+                //startActivity(i5);
                 Toast.makeText(Profile.this, "Create Appointments", Toast.LENGTH_SHORT).show();
                 finish();
             }
