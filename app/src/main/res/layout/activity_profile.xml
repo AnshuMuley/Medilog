@@ -37,7 +37,7 @@
         android:id="@+id/button4"
         android:layout_width="152dp"
         android:layout_height="141dp"
-        android:text="Add Appointments"
+        android:text="Set Appointment Reminder"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

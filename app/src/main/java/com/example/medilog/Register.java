@@ -30,12 +30,9 @@ public class Register extends AppCompatActivity {
     EditText password ;
     Button register;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-   // String addressPattern = "\\d+\\s+([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)";
     String namePattern = "[a-zA-Z]+$";
     String passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$" ;
 
-
-   // TextView text;
     boolean isAllFieldsChecked = true;
 
     private FirebaseAuth mAuth;
@@ -44,7 +41,6 @@ public class Register extends AppCompatActivity {
     DatabaseReference myRef = firebaseDatabase.getReference("Datab1");
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -58,7 +54,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i1 = new Intent(Register.this, Profile.class);
                 startActivity(i1);
-                Toast.makeText(Register.this, "moved to login", Toast.LENGTH_LONG).show();
+                Toast.makeText(Register.this, "Moved to login", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -70,7 +66,6 @@ public class Register extends AppCompatActivity {
         email = findViewById(R.id.Email);
         register = findViewById(R.id.Button);
         password = findViewById(R.id.editTextTextPassword);
-      //  Button register = (Button) findViewById(R.id.button);
         progressbar = findViewById(R.id.progressBar);
 
         register.setOnClickListener(new View.OnClickListener() {
@@ -81,15 +76,12 @@ public class Register extends AppCompatActivity {
                 if (isAllFieldsChecked) {
                     register.setClickable(true);
                     Intent i2 = new Intent(Register.this, Login.class);
-//                    String e =email.getText().toString().trim();
-//                    i2.putExtra("email", e);
                     startActivity(i2);
+                    signUp();
                 }
-                signUp();
             }
         });
     }
-
 
     private void signUp(){
         final String fname = firstName.getText().toString().trim();
@@ -103,8 +95,7 @@ public class Register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressbar.setVisibility(View.VISIBLE);
                         if (task.isSuccessful()) {
-
-//                            //we will store additional fiels in firebase
+                           //we will store additional fiels in firebase
                             Database datab1 = new Database(fname , lname , Address , Email){
                                /*fname,
                                 lname,
@@ -164,7 +155,6 @@ public class Register extends AppCompatActivity {
         return TextUtils.isEmpty(str);
     }
 
-    //Verification of valid credentials
     boolean checkDataEntered() {
 
         if (isEmpty(firstName)) {
@@ -191,13 +181,6 @@ public class Register extends AppCompatActivity {
             address.setError("Postal Address is required");
             isAllFieldsChecked =false;
         }
-            //  else {
-            // if (!address.getText().toString().trim().matches(addressPattern))
-            //    {
-            //       address.setError("Invalid postal address");
-            //    }
-            //   }
-            // }
         if (isEmpty(password))
         {
             password.setError("Password is required");
@@ -222,12 +205,5 @@ public class Register extends AppCompatActivity {
         return isAllFieldsChecked;
 
     }
-
-    public String GetKey(){
-        String uid=mAuth.getCurrentUser().getUid();
-        String id = myRef.child("Datab1").child(uid).getKey();
-        return id;
-    }
-
 }
 

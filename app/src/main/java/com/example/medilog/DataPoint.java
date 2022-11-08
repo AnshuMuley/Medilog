@@ -1,7 +1,5 @@
 package com.example.medilog;
 
-import java.util.ArrayList;
-
 public class DataPoint {
     int xValue;
     float yValue ;

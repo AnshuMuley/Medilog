@@ -47,14 +47,7 @@ public class Analysis extends AppCompatActivity {
     Button button;
     TextView textView2;
     TextView textView6;
-    ArrayList barArrayList;
-    ArrayList barArraylist;
     int xIndex = 1;
-
-    /*LineDataSet lineDataSet = new LineDataSet(null , null);
-    ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
-    LineData linedata ;*/
-
 
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference myRef1 = firebaseDatabase.getReference("ChartValues");
@@ -72,8 +65,6 @@ public class Analysis extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTest.setAdapter(adapter);
 
-        //spinnerTest.setOnItemSelectedListener(this);
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -81,7 +72,6 @@ public class Analysis extends AppCompatActivity {
         textView2 = (TextView) findViewById(R.id.textView2);
         spinner = (Spinner) findViewById(R.id.spinner2);
         editText = (EditText) findViewById(R.id.editTextNumberDecimal);
-        // firstName= (TextView) findViewById(R.id.textView4);
         textView6 = (TextView) findViewById(R.id.textView6);
         String p = getIntent().getStringExtra("profileName");
         textView6.setText(p);
@@ -99,59 +89,18 @@ public class Analysis extends AppCompatActivity {
                 String s = Range.getText().toString();
                 i3.putExtra("test", test);
                 i3.putExtra("range", s);
-                String id = myRef1.push().getKey();
-                final String yV1 = editText.getText().toString().trim();
-                Float y = Float. parseFloat(yV1);
-                DataPoint d1 = new DataPoint(xIndex, y );
-                myRef1.child(p).child(id).setValue(d1);
-                String p = getIntent().getStringExtra("profileName");
                 i3.putExtra("profileName", p);
 
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 DatabaseReference myRef1 = firebaseDatabase.getReference("ChartValues");
-               // DatabaseReference myRef = myRef1.child(p).child(id);
                 DatabaseReference myRef = myRef1.child(p);
 
-                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                        ArrayList<BarEntry> dataVals = new ArrayList<BarEntry>();
-                        if (dataSnapshot.hasChildren()) {
-                            for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
-                                DataPoint dataPoint = myDataSnapshot.getValue(DataPoint.class);
-                               // dataVals.add(new BarEntry(dataPoint.getxValue(), dataPoint.getyValue()));
-//                                if(xIndex > 7) {
-                                    dataVals.add(new BarEntry(xIndex, dataPoint.getyValue()));
-//                                    BarChart barChart = (BarChart) findViewById(R.id.barchart1);
-//                                    barChart.clear();
-//                                }
-                                xIndex++;
-                            }
-                          showCharts(dataVals);
-                            SetText();
-                        }
-                        else  {
-
-//                    Barchart.invalidate();
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                SetText();
 
                 Toast.makeText(Analysis.this, "Moved to Barchart", Toast.LENGTH_SHORT).show();
-
-            //   String test1 = getIntent().getStringExtra("test");
-
             }
         });
-
-
     }
-
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent myIntent = new Intent(Analysis.this, Profile.class);
@@ -172,7 +121,6 @@ public class Analysis extends AppCompatActivity {
         barChart.setData(barData);
         XAxis xAxis = barChart.getXAxis();
 
-
         //color bar data set
         barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
@@ -183,80 +131,173 @@ public class Analysis extends AppCompatActivity {
         barDataSet.setValueTextSize(10f);
         xAxis.setGranularity(1.0f);
         xAxis.setGranularityEnabled(true);
-        //barChart.getDescription().setEnabled(false);
-        barChart.setNoDataText("");
+        barChart.getDescription().setEnabled(false);
         barChart.invalidate();
     }
 
-public void SetText(){
-    EditText Range = (EditText) findViewById(R.id.editTextNumberDecimal);
-    String test = spinner.getSelectedItem().toString();
-   // String rge = getIntent().getStringExtra("range");
-    String s = Range.getText().toString();
-    Double range = Double.parseDouble(s);
-    if (test.equals("Fasting")) {
-        if (range >= 70 && range <= 100) {
-            textView2.setText("Indicates an optimal report . Blood sugar level is balanced in blood.");
-        } else if (range <= 70) {
-            textView2.setText("Indicates Low sugar level.");
-        } else if (range >= 100 && range <= 125) {
-            textView2.setText("Non Diabetic person - Slightly Higher Sugar level . Indicates a person is Pre Diabetic.\n" +
-                    "\n**Condition - This may happen suddenly during a major illness or injury or may happen over a longer period " +
-                    "and be caused by a chronic disease (Diabetes I or II.)**\n" +
-                    "\nDiabetic person - Indicates low sugar level that means the medications are lowering the blood " +
-                    " sugar level too much or over production of insulin.");
-        } else if (range >= 126) {
-            // textView.setText("Indicates a person is Diabetic");
-            if (126 <= range && range <= 180) {
-                textView2.setText("Indicates an optimal report for a Diabetic person.\nPrescribed Medication should be continued. \n " +
-                        "Precautions must be taken for eating habits");
+    public void SetText(){
+        EditText Range = (EditText) findViewById(R.id.editTextNumberDecimal);
+        String test = spinner.getSelectedItem().toString();
+        String s = Range.getText().toString();
+        Double range = Double.parseDouble(s);
+        String id = myRef1.push().getKey();
+        final String yV1 = editText.getText().toString().trim();
+        Float y = Float. parseFloat(yV1);
+        String p = getIntent().getStringExtra("profileName");
+        DataPoint d1 = new DataPoint(xIndex, y );
+        myRef1.child(p).child(test).child(id).setValue(d1);
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef1 = firebaseDatabase.getReference("ChartValues");
+        // DatabaseReference myRef = myRef1.child(p).child(id);
+        DatabaseReference myRef = myRef1.child(p).child(test);
+        if (test.equals("Fasting")) {
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-            } else if (range > 180) {
-                textView2.setText("High levels of fasting blood sugar suggest the body was not able to lower blood sugar levels\n" +
-                        " this points to insulin resistance , inadequate insulin production , or in some cases, both .\n" +
-                        " * Must consult to a specialist. *");
+                    ArrayList<BarEntry> dataVals = new ArrayList<BarEntry>();
+                    if (dataSnapshot.hasChildren()) {
+                        for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
+                            DataPoint dataPoint = myDataSnapshot.getValue(DataPoint.class);
+                            dataVals.add(new BarEntry(xIndex, dataPoint.getyValue()));
+                            xIndex++;
+                        }
+                        showCharts(dataVals);
+                    }
+                    else  {
+
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+            if (range >= 70 && range <= 100) {
+                textView2.setText("Indicates an optimal report . Blood sugar level is balanced in blood.");
+            } else if (range <= 70) {
+                textView2.setText("Indicates Low sugar level.");
+            } else if (range >= 100 && range <= 125) {
+                textView2.setText("Non Diabetic person - Slightly Higher Sugar level . Indicates a person is Pre Diabetic.\n" +
+                        "\n**Condition - This may happen suddenly during a major illness or injury or may happen over a longer period " +
+                        "and be caused by a chronic disease (Diabetes I or II.)**\n" +
+                        "\nDiabetic person - Indicates low sugar level that means the medications are lowering the blood " +
+                        " sugar level too much or over production of insulin.");
+            } else if (range >= 126) {
+                if (126 <= range && range <= 180) {
+                    textView2.setText("Indicates an optimal report for a Diabetic person.\nPrescribed Medication should be continued. \n " +
+                            "Precautions must be taken for eating habits");
+
+                } else if (range > 180) {
+                    textView2.setText("High levels of fasting blood sugar suggest the body was not able to lower blood sugar levels\n" +
+                            " this points to insulin resistance , inadequate insulin production , or in some cases, both .\n" +
+                            " * Must consult to a specialist. *");
+                }
+            }
+        }
+
+        if (test.equals("Posting")) {
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    ArrayList<BarEntry> dataVals = new ArrayList<BarEntry>();
+                    if (dataSnapshot.hasChildren()) {
+                        for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
+                            DataPoint dataPoint = myDataSnapshot.getValue(DataPoint.class);
+                            dataVals.add(new BarEntry(xIndex, dataPoint.getyValue()));
+                            xIndex++;
+                        }
+                        showCharts(dataVals);
+                    }
+                    else  {
+
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+            if (range <= 70) {
+                textView2.setText("Indicates Low sugar level.");
+            } else if (range >= 71 && range <= 140) {
+                textView2.setText("Indicates an optimal Post Meal report .");
+            } else if (range >= 140 && range <= 199) {
+                textView2.setText("Diabetic  -  It indicates an optimal report for a diabetic person .\n" +
+                        "\nNon Diabetic - A person may be Pre-Diabetic\n" +
+                        "\n* Consulting a specialist is recommended. *");
+            } else if (range >= 200) {
+                textView2.setText("Indicates a person is Diabetic.\n" +
+                        "Condition -  This may arise from under production of Insulin.\n" +
+                        "High intake of carbohydrates or Glucose .\n" +
+                        "\n * Consult a specialist and get your medicines revised." +
+                        "\nPrecautions must be taken in your eating habits. *");
+            }
+        }
+        if (test.equals("Random")) {
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    ArrayList<BarEntry> dataVals = new ArrayList<BarEntry>();
+                    if (dataSnapshot.hasChildren()) {
+                        for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
+                            DataPoint dataPoint = myDataSnapshot.getValue(DataPoint.class);
+                            dataVals.add(new BarEntry(xIndex, dataPoint.getyValue()));
+                            xIndex++;
+                        }
+                        showCharts(dataVals);
+                    }
+                    else  {
+
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+            if (range <= 70) {
+                textView2.setText("Indicates Low sugar level.\n" + "Immediate intake of juice, candy, glucose is highly recommended. ");
+            } else if (range >= 71 && range <= 139) {
+                textView2.setText("Indicates an optimal Random report .");
+            } else if (range >= 140 && range <= 199) {
+                textView2.setText(" Indicates a person is Pre-Diabetic. \n" + "Consulting a specialist is recommended.\n" + "Generally Doctors recommend this test to diagnose Diabetes.\n" + "To Help confirm the Diagnosis,the doctor may also order different type of test. ");
+            } else if (range >= 200) {
+                textView2.setText("Indicates a person is Diabetic.\n" + "Consulting a specialist is recommended.\n" + "Generally Doctors recommend this test to diagnose Diabetes.\n" + "To Help confirm the Diagnosis,the doctor may also order different type of test. ");
+            }
+        }
+        if (test.equals("A1c Test")) {
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    ArrayList<BarEntry> dataVals = new ArrayList<BarEntry>();
+                    if (dataSnapshot.hasChildren()) {
+                        for (DataSnapshot myDataSnapshot : dataSnapshot.getChildren()) {
+                            DataPoint dataPoint = myDataSnapshot.getValue(DataPoint.class);
+                            dataVals.add(new BarEntry(xIndex, dataPoint.getyValue()));
+                            xIndex++;
+                        }
+                        showCharts(dataVals);
+                    }
+                    else  {
+
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+            if (range <= 5.7) {
+                textView2.setText("Indicates an optimal A1c test report .");
+            } else if (range > 5.7 && range <= 6.4) {
+                textView2.setText(" Indicates a person is Pre-Diabetic. \n" + "Consulting a specialist is recommended.");
+            } else if (range >= 6.5) {
+                textView2.setText(" Indicates a person is Diabetic. \n" + "Consulting a specialist is recommended.");
             }
         }
     }
-
-    if (test.equals("Posting")) {
-        if (range <= 70) {
-            textView2.setText("Indicates Low sugar level.");
-        } else if (range >= 71 && range <= 140) {
-            textView2.setText("Indicates an optimal Post Meal report .");
-        } else if (range >= 140 && range <= 199) {
-            textView2.setText("Diabetic  -  It indicates an optimal report for a diabetic person .\n" +
-                    "\nNon Diabetic - A person may be Pre-Diabetic\n" +
-                    "\n* Consulting a specialist is recommended. *");
-        } else if (range >= 200) {
-            textView2.setText("Indicates a person is Diabetic.\n" +
-                    "Condition -  This may arise from under production of Insulin.\n" +
-                    "High intake of carbohydrates or Glucose .\n" +
-                    "\n * Consult a specialist and get your medicines revised." +
-                    "\nPrecautions must be taken in your eating habits. *");
-        }
-    }
-    if (test.equals("Random")) {
-
-        if (range <= 70) {
-            textView2.setText("Indicates Low sugar level.\n" + "Immediate intake of juice, candy, glucose is highly recommended. ");
-        } else if (range >= 71 && range <= 139) {
-            textView2.setText("Indicates an optimal Random report .");
-        } else if (range >= 140 && range <= 199) {
-            textView2.setText(" Indicates a person is Pre-Diabetic. \n" + "Consulting a specialist is recommended.\n" + "Generally Doctors recommend this test to diagnose Diabetes.\n" + "To Help confirm the Diagnosis,the doctor may also order different type of test. ");
-        } else if (range >= 200) {
-            textView2.setText("Indicates a person is Diabetic.\n" + "Consulting a specialist is recommended.\n" + "Generally Doctors recommend this test to diagnose Diabetes.\n" + "To Help confirm the Diagnosis,the doctor may also order different type of test. ");
-        }
-    }
-    if (test.equals("A1c Test")) {
-        if (range <= 5.7) {
-            textView2.setText("Indicates an optimal A1c test report .");
-        } else if (range > 5.7 && range <= 6.4) {
-            textView2.setText(" Indicates a person is Pre-Diabetic. \n" + "Consulting a specialist is recommended.");
-        } else if (range >= 6.5) {
-            textView2.setText(" Indicates a person is Diabetic. \n" + "Consulting a specialist is recommended.");
-        }
-        //  }
-    }
-}
 }

@@ -9,6 +9,20 @@
     tools:context=".UploadReports">
 
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="122dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/button7"
         android:layout_width="317dp"
@@ -18,10 +32,17 @@
         android:layout_marginBottom="10dp"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        android:text="Select and Upload"
+        android:text="Select "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="317dp"
+        android:layout_height="65dp"
+        android:layout_margin="37dp"
+        android:text="Upload" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -32,6 +53,23 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="194dp"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <ProgressBar android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="317dp"
+        android:layout_height="65dp"
+        android:layout_margin="37dp"
+        android:text="Show All Images" />
 
 
 </LinearLayout>

@@ -65,13 +65,6 @@ public class Login extends AppCompatActivity {
                     login.setClickable(true);
                     progressbar2.setVisibility(View.VISIBLE);
 
-                    // String password = password.getText().toString();
-                    // String email = email.getText().toString();
-
-              /*  Intent intent=new Intent(Login.this,Profile.class);
-                startActivity(intent);
-                Toast.makeText(Login.this,"Moved to Profile",Toast.LENGTH_SHORT).show();*/
-
                     firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override

@@ -72,13 +72,8 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-
         LogOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Intent i7 = new Intent(Profile.this, Login.class);
-                //  startActivity(i7);
-                // Toast.makeText(Profile.this, "", Toast.LENGTH_SHORT).show();
-                //  finish();
                 firebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(Profile.this , Login.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -88,17 +83,16 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-
         b1.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent i3 = new Intent(Profile.this,UploadReports.class);
+                String p =profileName.getText().toString().trim();
+                i3.putExtra("profileName", p);
                 startActivity(i3);
-
                 Toast.makeText(Profile.this, "Moved to Upload Reports", Toast.LENGTH_SHORT).show();
             }
-
-
         });
+
         b2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i4 = new Intent(Profile.this, Analysis.class);
@@ -106,7 +100,6 @@ public class Profile extends AppCompatActivity {
                 i4.putExtra("profileName", p);
                 startActivity(i4);
                 Toast.makeText(Profile.this, "Moved to Analysis", Toast.LENGTH_SHORT).show();
-                finish();
             }
         });
 
@@ -114,7 +107,6 @@ public class Profile extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i5 = new Intent(Profile.this, Profile.class);
                 Calendar cal = Calendar.getInstance();
-                // Intent mIntent = new Intent(Appointments.this, Appointments.class);
                 Intent mIntent = new Intent(Intent.ACTION_EDIT);
                 mIntent.setType("vnd.android.cursor.item/event");
                 mIntent.putExtra("beginTime", cal.getTimeInMillis());
@@ -123,26 +115,18 @@ public class Profile extends AppCompatActivity {
                 mIntent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
                 mIntent.putExtra("title", "A Test Event from android app");
                 startActivity(mIntent);
-                //startActivity(i5);
                 Toast.makeText(Profile.this, "Create Appointments", Toast.LENGTH_SHORT).show();
-                finish();
             }
         });
 
         b5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i6 = new Intent(Profile.this, UploadPrescriptions.class);
+                String p =profileName.getText().toString().trim();
+                i6.putExtra("profileName", p);
                 startActivity(i6);
                 Toast.makeText(Profile.this, "Upload Prescriptions", Toast.LENGTH_SHORT).show();
-                finish();
             }
         });
-
-
-
-
-
-
-
     }
 }
