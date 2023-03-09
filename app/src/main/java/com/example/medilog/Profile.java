@@ -3,13 +3,16 @@ package com.example.medilog;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +31,14 @@ public class Profile extends AppCompatActivity {
     Button b2;
     Button b4;
     Button b5;
+    Button b6;
     Button LogOut;
     TextView profileName ;
+
+//newly added
+
+
+    //
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -46,7 +55,12 @@ public class Profile extends AppCompatActivity {
         b4=(Button) findViewById(R.id.button4);
         b5 = (Button) findViewById(R.id.button5);
         LogOut=(Button) findViewById(R.id.button6);
+        b6 = (Button) findViewById(R.id.button19);
         profileName=(TextView) findViewById(R.id.editTextTextPersonName);
+
+
+
+
 
         firebaseAuth= FirebaseAuth.getInstance();
         firebaseUser= firebaseAuth.getCurrentUser();
@@ -95,7 +109,8 @@ public class Profile extends AppCompatActivity {
 
         b2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i4 = new Intent(Profile.this, Analysis.class);
+                //Intent i4 = new Intent(Profile.this, Analysis.class);
+                Intent i4 = new Intent(Profile.this, choose_Analysis.class);//Analysis
                 String p =profileName.getText().toString().trim();
                 i4.putExtra("profileName", p);
                 startActivity(i4);
@@ -126,6 +141,16 @@ public class Profile extends AppCompatActivity {
                 i6.putExtra("profileName", p);
                 startActivity(i6);
                 Toast.makeText(Profile.this, "Upload Prescriptions", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        b6.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent i3 = new Intent(Profile.this,MapsActivity.class);
+                String p =profileName.getText().toString().trim();
+                i3.putExtra("profileName", p);
+                startActivity(i3);
+                Toast.makeText(Profile.this, "Moved to Maps", Toast.LENGTH_SHORT).show();
             }
         });
     }

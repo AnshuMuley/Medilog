@@ -45,6 +45,7 @@ public class Analysis extends AppCompatActivity {
     Spinner spinner;
     EditText editText;
     Button button;
+
     TextView textView2;
     TextView textView6;
     int xIndex = 1;
@@ -74,7 +75,10 @@ public class Analysis extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editTextNumberDecimal);
         textView6 = (TextView) findViewById(R.id.textView6);
         String p = getIntent().getStringExtra("profileName");
+
         textView6.setText(p);
+
+
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +107,7 @@ public class Analysis extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent myIntent = new Intent(Analysis.this, Profile.class);
+        Intent myIntent = new Intent(Analysis.this, choose_Analysis.class);//profile
         startActivity(myIntent);
         switch (item.getItemId()) {
             case android.R.id.home:

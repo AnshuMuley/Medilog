@@ -7,4 +7,6 @@
         <item>Random</item>
         <item>A1c Test</item>
     </string-array>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="google_maps_key">AIzaSyA_zeu_edvsjJsqcTIP6rSdP_DmgL7QZdg</string>
 </resources>

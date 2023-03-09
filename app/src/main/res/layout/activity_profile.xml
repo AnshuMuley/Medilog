@@ -24,6 +24,7 @@
         android:id="@+id/button2"
         android:layout_width="152dp"
         android:layout_height="141dp"
+        android:elevation="5dp"
         android:text="Analysis"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +74,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.328" />
+        app:layout_constraintVertical_bias="0.315" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -84,7 +85,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.105"
+        app:layout_constraintVertical_bias="0.071"
         app:srcCompat="@drawable/maleprofile" />
 
     <Button
@@ -97,4 +98,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.975" />
+
+    <Button
+        android:id="@+id/button19"
+        android:layout_width="116dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="Maps"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
