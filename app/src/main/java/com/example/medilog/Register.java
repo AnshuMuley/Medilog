@@ -52,7 +52,7 @@ public class Register extends AppCompatActivity {
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i1 = new Intent(Register.this, Profile.class);
+                Intent i1 = new Intent(Register.this, Profile.class);//login
                 startActivity(i1);
                 Toast.makeText(Register.this, "Moved to login", Toast.LENGTH_LONG).show();
             }
